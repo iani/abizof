@@ -2,3 +2,5 @@
 *.dat
 build/
 build
+*.xcodeproj
+
