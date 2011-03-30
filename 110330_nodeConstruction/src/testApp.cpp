@@ -7,32 +7,8 @@ void testApp::setup(){
 
 	nInstances = 1024; // we have to pre-define the number of the instances
 	myClassObject = new myClass*[nInstances];	// initialize myClassObject 
-//	for (int i = 0; i < nInstances; i++)	
-//	{
-//		myClassObject[i] = new myClass();	// create (?) instance of the class
-//	}
-
 	nodeId = 0;
     enabled=false;
-/*
-	// add the newFloat method to listen for eventsAddon newFloatEvent
-	ofAddListener(evObject.newFloatEvent, this, &testApp::newFloat);
-
-	// add the newFloat method to listen for eventsAddon newIntEvent
-	ofAddListener(evObject.newIntEvent, this, &testApp::newInt);
-
-	// add the newFloat method to listen for myClass newFloatEvent
-	ofAddListener(myClassObject[0]->newFloatEvent, this, &testApp::newTestFloat);
-	
-	// add the newFloat method to listen for myClass newFloatEvent
-	ofAddListener(myClassObject[0]->newIntEvent, this, &testApp::newTestInt);
-*/	
-//	for (int i = 0; i < nInstances; i++)	
-//	{
-//		ofAddListener(myClassObject[i]->newFloatEvent, this, &testApp::newTestFloat);
-//		//ofAddListener(myClassObject[i]->gLine, this, &testApp::gLine);
-//	}
-
 }
 
 
@@ -42,6 +18,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	ofDrawBitmapString("nodeId: " + ofToString(nodeId), 20, 220);
 	ofDrawBitmapString(floatMsg, 20, 20);
 	ofDrawBitmapString(intMsg, 20, 40);
 	ofDrawBitmapString("click to enable/disable events", 20, 60);
@@ -78,20 +55,19 @@ void testApp::newTestInt(int & i){
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){
-	if (key == 'o')	
-	{
+	if (key == 'o' && nodeId != 0)	
+	{	
 		nodeId--;
-		//myClassObject[nodeId]->~myClass::myClass[nodeId];
 		myClassObject[nodeId]->disable();
 		myClassObject[nodeId]->~myClass();
-	
+
 	}
 	if (key == 'p')	
 	{
-		nodeId++;
 		myClassObject[nodeId] = new myClass();
 		ofAddListener(myClassObject[nodeId]->newFloatEvent, this, &testApp::newTestFloat);
 		myClassObject[nodeId]->enable();
+		nodeId++;
 	}
 
 	if (key == 'z')	

@@ -4,3 +4,5 @@ build/
 build
 *.xcodeproj
 
+openFrameworks.app/
+.gitignore~
