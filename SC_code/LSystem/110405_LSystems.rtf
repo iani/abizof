@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf540
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red225\green170\blue79;\red230\green120\blue16;\red250\green248\blue227;
+\red175\green171\blue255;\red160\green170\blue45;}
+\deftab560
+\pard\pardeftab560\ql\qnatural
+
+\f0\fs18 \cf2 // Create an enviroment\cf1 \
+(\
+e = (\
+	initString: \cf3 "F-F"\cf1 , \
+	subString: \cf3 "F[F]"\cf1 , \
+	doos: \cf4 4\cf1 , \
+	thetaStep: \cf4 1\cf1 , \
+	lengthStep: \cf4 0.01\cf1 , \
+	rate: \cf4 1\cf1 , \
+	length: \cf4 13\cf1 , \
+	theta: \cf4 60\cf1 , \
+	addr: \cf5 NetAddr\cf1 .localAddr);\
+\
+e use: \{ \
+	l = \cf5 Task\cf1 (\{\
+		loop  \{ \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab560\ql\qnatural\pardirnatural
+\cf1 			l= \cf5 RedLSystem\cf1 (~initString, ($F: ~subString));		\
+			t = \cf5 RedLTurtle\cf1 (l, ~length, ~theta, \cf4 1\cf1 );\
+			~doos do: \{\
+				l.next;\
+			\};\
+			~addr.sendMsg(\cf3 "/lsystem"\cf1 , l.asString, t.length, t.theta, t.scale, t.noise, l.generation);\
+			~theta = ~theta + ~thetaStep;\
+			~length = ~length + ~lengthStep;\
+\pard\pardeftab560\ql\qnatural
+\cf1 			~rate.wait;\
+		\}\
+	\})\
+\}\
+)\
+l.start;\
+e[\cf6 \\rate\cf1 ] = \cf4 0.05\cf1 ;\
+\
+\cf2 // koch curve\cf1 \
+(\
+e[\cf6 \\addr\cf1 ] = \cf5 NetAddr\cf1 (\cf3 "127.0.0.1"\cf1 , \cf4 12345\cf1 );  \cf2 //localhost, oF port\cf1 \
+e[\cf6 \\initString\cf1 ] = \cf3 "F"\cf1 ;\
+e[\cf6 \\subString\cf1 ] = \cf3 "F-F++F-F"\cf1 ;\
+e[\cf6 \\theta\cf1 ] = \cf4 60\cf1 ;\
+e[\cf6 \\length\cf1 ] = \cf4 20\cf1 ;\
+e[\cf6 \\doos\cf1 ] = \cf4 4\cf1 ;\
+)\
+\cf2 //--big h\cf1 \
+(\
+e[\cf6 \\addr\cf1 ] = \cf5 NetAddr\cf1 (\cf3 "127.0.0.1"\cf1 , \cf4 12345\cf1 );  \cf2 //localhost, oF port\cf1 \
+e[\cf6 \\initString\cf1 ] = \cf3 "[F]--F"\cf1 ;\
+e[\cf6 \\subString\cf1 ] = \cf3 "|[+F][-F]"\cf1 ;\
+e[\cf6 \\theta\cf1 ] = \cf4 110\cf1 ;\
+e[\cf6 \\length\cf1 ] = \cf4 80\cf1 ;\
+e[\cf6 \\doos\cf1 ] = \cf4 6\cf1 ;\
+)\
+\cf2 //--twig\cf1 \
+(\
+e[\cf6 \\addr\cf1 ] = \cf5 NetAddr\cf1 (\cf3 "127.0.0.1"\cf1 , \cf4 12345\cf1 );  \cf2 //localhost, oF port\cf1 \
+e[\cf6 \\initString\cf1 ] = \cf3 "F"\cf1 ;\
+e[\cf6 \\subString\cf1 ] = \cf3 "|[-F][+F]"\cf1 ;\
+e[\cf6 \\theta\cf1 ] = \cf4 20\cf1 ;\
+e[\cf6 \\length\cf1 ] = \cf4 70\cf1 ;\
+e[\cf6 \\doos\cf1 ] = \cf4 6\cf1 ;\
+)\
+\cf2 //--weed 1\cf1 \
+(\
+e[\cf6 \\addr\cf1 ] = \cf5 NetAddr\cf1 (\cf3 "127.0.0.1"\cf1 , \cf4 12345\cf1 );  \cf2 //localhost, oF port\cf1 \
+e[\cf6 \\initString\cf1 ] = \cf3 "F"\cf1 ;\
+e[\cf6 \\subString\cf1 ] = \cf3 "-F-F[-F]F[+F]F"\cf1 ;\
+e[\cf6 \\theta\cf1 ] = \cf4 25\cf1 ;\
+e[\cf6 \\length\cf1 ] = \cf4 40\cf1 ;\
+e[\cf6 \\doos\cf1 ] = \cf4 3\cf1 ;\
+)\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+///////////\
+\
+o = \cf5 NetAddr\cf1 (\cf3 "localhost"\cf1 , \cf4 46100\cf1 );\
+o.sendMsg(\cf3 "/initString"\cf1 , \cf3 "F-F-F"\cf1 );\
+o.sendMsg(\cf3 "/subString"\cf1 , \cf3 "F[F]-F+F[--F]+F-F"\cf1 );\
+o.sendMsg(\cf3 "/subString"\cf1 , \cf3 ""\cf1 );\
+o.sendMsg(\cf3 "/theta"\cf1 , \cf4 30\cf1 );\
+o.sendMsg(\cf3 "/thetaStep"\cf1 , \cf4 1\cf1 );\
+o.sendMsg(\cf3 "/lengthStep"\cf1 , \cf4 0.1\cf1 );\
+o.sendMsg(\cf3 "/startPosDefault"\cf1 );\
+k = \cf5 Task\cf1 (\{\
+		loop  \{ \
+		o.sendMsg(\cf3 "/startPos"\cf1 , \cf4 600\cf1 ,\cf4 500\cf1 ,\cf4 0\cf1 );\
+			\cf4 0.1\cf1 .wait;\
+		\}\
+\})\
+k.start	\
+k.stop\
+\
+\cf5 Sendmidi\cf1 .new\
+e.free\
+l.stop;\
+\pard\pardeftab560\ql\qnatural
+\cf6 \\doos\cf1 ] = \cf4 3\cf1 ;\
+\
+\pard\pardeftab560\ql\qnatural
+\cf2 //	Basic Initial\cf1 \
+(\
+e[\cf6 \\addr\cf1 ] = \cf5 NetAddr\cf1 (\cf3 "127.0.0.1"\cf1 , \cf4 46100\cf1 );  \cf2 //localhost, oF port\cf1 \
+e[\cf6 \\initString\cf1 ] = \cf3 "F-F-F-F"\cf1 ;\
+e[\cf6 \\subString\cf1 ] = \cf3 "F[F]-F+F[--F]+F-F"\cf1 ;\
+e[\cf6 \\theta\cf1 ] = \cf4 20\cf1 ;\
+e[\cf6 \\length\cf1 ] = \cf4 50\cf1 ;\
+e[\cf6 \\thetaStep\cf1 ] = \cf4 1\cf1 ;\
+e[\cf6 \\lengthStep\cf1 ] = \cf4 0.01\cf1 ;\
+e[}
