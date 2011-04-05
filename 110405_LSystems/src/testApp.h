@@ -25,6 +25,7 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		
 		int		lsystemGeneration;
+		int		rBack,gBack,bBack,aBack;
 		ofLsystem				LSystem;
 		ofxOscSender			osc_sender;		
 		

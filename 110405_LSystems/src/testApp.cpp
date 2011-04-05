@@ -49,12 +49,25 @@ void testApp::update(){
 
 							
 			}
+		if ( m.getAddress() == "rgb" )					{
+			if ( m.getArgAsString( 0 ) == "rBack" )			rBack = m.getArgAsInt32(1);
+			else if ( m.getArgAsString( 0 ) == "gBack" )			gBack = m.getArgAsInt32(1);	
+			else if ( m.getArgAsString( 0 ) == "bBack" )			bBack = m.getArgAsInt32(1);
+			else if ( m.getArgAsString( 0 ) == "aBack" )			aBack = m.getArgAsInt32(1);
+		}	//	rgb directamente					
 		}
 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GL_SRC_ALPHA_SATURATE,GL_ONE     GL_SRC_ALPHA, GL_ONE
+	ofFill();	
+	ofSetColor(rBack,gBack,bBack,aBack);
+	ofRect(0,0,ofGetWidth(),ofGetHeight());			
+
+
+	
 
 }
 
