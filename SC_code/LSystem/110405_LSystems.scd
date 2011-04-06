@@ -1,6 +1,6 @@
 /*
 LSystem and Event - enviroment study
-
+Quarks.gui
 Aris Bezas Tue, 05 April 2011, 10:15
 */
 
@@ -18,7 +18,7 @@ e = (
 	addr: NetAddr.localAddr);
 
 e use: { 
-	l = Task({
+	k = Task({
 		loop  { 
 			l= RedLSystem(~initString, ($F: ~subString));		
 			t = RedLTurtle(l, ~length, ~theta, 1);
@@ -40,7 +40,7 @@ OF.rgb("gBack",0)
 OF.rgb("bBack",0)
 OF.rgb("aBack",20)
 
-l.start;	// Start the Task
+k.start;	// Start the Task
 e[\rate] = 0.05;	//	define the rate
 
 // koch curve
