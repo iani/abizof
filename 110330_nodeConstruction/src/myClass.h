@@ -13,7 +13,6 @@
 
 class myClass {
 public:
-	//~myClass() {}	// Already define
 	myClass(){
 	    counter = 0;
 	}
@@ -29,16 +28,10 @@ public:
 	void update(ofEventArgs & args){
 		counter+=0.3;
 		int intCounter=(int)counter;
-		ofNotifyEvent(newFloatEvent, counter, this);
-		ofNotifyEvent(newIntEvent, intCounter, this);
 		ofLine(float(intCounter % 600), 300.0, 400.0, 200.0);
 	}
-
-	ofEvent<float> newFloatEvent;
-	ofEvent<int> newIntEvent;
-	
 
 private:
 	float counter;
 };
-#endif /* OFXEVENTSADDON_H_ */
+#endif

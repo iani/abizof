@@ -3,7 +3,6 @@
 
 #include "ofMain.h"
 #include "ofEvents.h"
-#include "eventsObject.h"
 #include "myClass.h"
 
 class testApp : public ofBaseApp {
@@ -22,29 +21,10 @@ class testApp : public ofBaseApp {
 		void mouseReleased(int x, int y, int button);
 		void windowResized(int w, int h);
 
-		//method that will receive events from ofxEventsAddon
-		void gLine(float & f);
-		void newFloat(float & f);
-		void newInt(int & i);
-		void newTestFloat(float & f);
-		void newTestInt(int & i);
-
 		int nInstances;	// the number of instatces
 		int nodeId;
 		
-		//eventsObject evObject;
 		myClass **myClassObject;
-
-		string floatMsg;
-		string intMsg;
-		string expireMsg;
-
-		string testFloatMsg;
-		string testIntMsg;
-		string testExpireMsg;
-	
-		bool enabled;
-
 };
 
 #endif
