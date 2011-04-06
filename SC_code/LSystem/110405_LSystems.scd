@@ -37,9 +37,9 @@ e use: {
 // Control background colors at OF
 
 
-OF.int("rBack", 255)
-OF.int("gBack", 255)
-OF.int("bBack", 255)
+OF.int("rBack", 55)
+OF.int("gBack", 55)
+OF.int("bBack", 55)
 OF.int("aBack", 20)
 
 
@@ -64,8 +64,10 @@ e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "[F]--F";
 e[\subString] = "|[+F][-F]";
 e[\theta] = 110;
-e[\length] = 80;
+e[\length] = 40;
 e[\doos] = 6;
+e[\thetaStep]=0.1;
+Slider
 )
 //--twig
 (
@@ -87,7 +89,12 @@ e[\doos] = 3;
 )
 
 
-
+// GUI
+(
+w = Window.new.front;
+a = Slider(w, Rect(20, 10, 150, 20));
+a.action = { e[\thetaStep]=a.value };
+)
 
 
 
