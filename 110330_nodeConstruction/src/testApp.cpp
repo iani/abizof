@@ -1,10 +1,9 @@
 #include "testApp.h"
 #include "Poco/Delegate.h"
-#include "Poco/Timestamp.h"
+//#include "Poco/Timestamp.h"
 //--------------------------------------------------------------
 void testApp::setup(){
 	ofBackground(50,50,50);
-
 	nInstances = 1024; // we have to pre-define the number of the instances
 	myClassObject = new myClass*[nInstances];	// initialize myClassObject 
 	nodeId = 0;
