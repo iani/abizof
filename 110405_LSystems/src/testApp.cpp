@@ -63,7 +63,7 @@ void testApp::update(){
 void testApp::draw(){
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GL_SRC_ALPHA_SATURATE,GL_ONE     GL_SRC_ALPHA, GL_ONE
 	ofFill();	
-	ofSetColor(rBack,gBack,bBack,aBack);
+	ofSetColor(0,gBack,bBack,aBack);
 	ofRect(0,0,ofGetWidth(),ofGetHeight());			
 }
 
