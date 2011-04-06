@@ -1,6 +1,6 @@
 /*
 LSystem and Event - enviroment study
-Quarks.gui
+
 Aris Bezas Tue, 05 April 2011, 10:15
 */
 
@@ -35,12 +35,17 @@ e use: {
 )
 
 // Control background colors at OF
-OF.rgb("rBack",0)
-OF.rgb("gBack",0)
-OF.rgb("bBack",0)
-OF.rgb("aBack",20)
+
+
+OF.int("rBack", 255)
+OF.int("gBack", 255)
+OF.int("bBack", 255)
+OF.int("aBack", 20)
+
 
 k.start;	// Start the Task
+k.pause;
+k.stop;
 e[\rate] = 0.05;	//	define the rate
 
 // koch curve

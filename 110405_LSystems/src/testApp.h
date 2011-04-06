@@ -29,6 +29,12 @@ class testApp : public ofBaseApp{
 		ofLsystem				LSystem;
 		ofxOscSender			osc_sender;		
 		
+		// STL <map> implementation
+		map<string, int> iv;
+		map<string, float> fv;		
+		map<string, string> sv;				
+		
+		
 	private:
 		
 		ofxOscReceiver	receiver;

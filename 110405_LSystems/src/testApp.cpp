@@ -1,4 +1,5 @@
 #include "testApp.h"
+//#define vara	iv["a"]
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -19,6 +20,8 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
+
+	//printf("%d\n",i(test));
 	for ( int i=0; i<NUM_MSG_STRINGS; i++ )	{
 		if ( timers[i] < ofGetElapsedTimef() )
 			msg_strings[i] = "";
@@ -27,34 +30,30 @@ void testApp::update(){
 	{
 		ofxOscMessage m;
 		receiver.getNextMessage( &m ); 
+		if ( m.getAddress() == "int" )	{
+			iv[m.getArgAsString(0)] = m.getArgAsInt32(1);			
+			printf("%d", m.getArgAsInt32(1));
+		}
 
 		if ( m.getAddress() == "/lsystem" )	{
-				//lsystemString = m.getArgAsString( 0 );
-				//cout << lsystemString << endl;
-				LSystem.lsystemString = m.getArgAsString( 0 );
-				LSystem.length = m.getArgAsInt32( 1 );
-				LSystem.theta = m.getArgAsFloat( 2 );
-				LSystem.scale = m.getArgAsFloat( 3 );				
-				LSystem.noise = m.getArgAsFloat( 4 );	
-				lsystemGeneration = m.getArgAsInt32( 5 );
-				
-				if	(lsystemGeneration == 0)	{
-					LSystem.startGeneration = true;
-				}				
-				
+			LSystem.lsystemString = m.getArgAsString( 0 );
+			LSystem.length = m.getArgAsInt32( 1 );
+			LSystem.theta = m.getArgAsFloat( 2 );
+			LSystem.scale = m.getArgAsFloat( 3 );				
+			LSystem.noise = m.getArgAsFloat( 4 );	
+			lsystemGeneration = m.getArgAsInt32( 5 );
+			
+			if	(lsystemGeneration == 0)	{
+				LSystem.startGeneration = true;
+			}				
+			
 //				cout << LSystem.depthLength <<	endl;
 //				cout << LSystem.scale <<	endl;
 //				cout << LSystem.depthLength <<	endl;								
-				LSystem.recieveString();		
+			LSystem.recieveString();		
 
 							
 			}
-		if ( m.getAddress() == "rgb" )					{
-			if ( m.getArgAsString( 0 ) == "rBack" )			rBack = m.getArgAsInt32(1);
-			else if ( m.getArgAsString( 0 ) == "gBack" )			gBack = m.getArgAsInt32(1);	
-			else if ( m.getArgAsString( 0 ) == "bBack" )			bBack = m.getArgAsInt32(1);
-			else if ( m.getArgAsString( 0 ) == "aBack" )			aBack = m.getArgAsInt32(1);
-		}	//	rgb directamente					
 		}
 
 }
@@ -63,7 +62,7 @@ void testApp::update(){
 void testApp::draw(){
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GL_SRC_ALPHA_SATURATE,GL_ONE     GL_SRC_ALPHA, GL_ONE
 	ofFill();	
-	ofSetColor(0,gBack,bBack,aBack);
+	ofSetColor(iv["rBack"],iv["gBack"],iv["bBack"],iv["aBack"]);
 	ofRect(0,0,ofGetWidth(),ofGetHeight());			
 }
 
