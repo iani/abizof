@@ -65,10 +65,6 @@ void testApp::draw(){
 	ofFill();	
 	ofSetColor(rBack,gBack,bBack,aBack);
 	ofRect(0,0,ofGetWidth(),ofGetHeight());			
-
-
-	
-
 }
 
 //--------------------------------------------------------------

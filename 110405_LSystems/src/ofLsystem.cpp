@@ -116,15 +116,12 @@ void ofLsystem::update(){
 void ofLsystem::substitution(){
 	// here we will make the string substitution
 	int stringPos = initString.length();
-	for	(int i = 0; i < 7; ++i)	{
-		for ( int j = 0; j < stringPos; ++j )	{
-			if	(initString.at(j) == 'F')	{
-				initString.replace(j, 1, subString);
-				//cout << initString << endl;
-				j = j + subString.length();
-			}
-		}
-		
+	for ( int j = 0; j < stringPos; ++j )	{
+		if	(initString.at(j) == 'F')	{
+			initString.replace(j, 1, subString);
+			//cout << initString << endl;
+			j = j + subString.length();
+		}		
 	}
 	theta = theta + thetaStep;
 	length = length + lengthStep; 
@@ -153,7 +150,7 @@ void ofLsystem::recieveString(){
 		if	(lsystemString[j] == 'F')	{
 			ofLine(0,0,0, - oldLength);
 			oldLength = scale*oldLength;	
-			//ofCircle(0,0,3);
+			ofCircle(0,0,3);
 			ofTranslate(0, - oldLength, 0);				
 		}
 		if	(lsystemString[j] == 'G')	{
