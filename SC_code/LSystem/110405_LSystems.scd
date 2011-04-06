@@ -25,7 +25,7 @@ e use: {
 			~doos do: {
 				l.next;
 			};
-			~addr.sendMsg("/lsystem", l.asString, t.length, t.theta, t.scale, t.noise, l.generation);
+			~addr.sendMsg("lsystem", l.asString, t.length, t.theta, t.scale, t.noise, l.generation);
 			~theta = ~theta + ~thetaStep;
 			~length = ~length + ~lengthStep;
 			~rate.wait;
@@ -42,6 +42,22 @@ OF.int("gBack", 55)
 OF.int("bBack", 55)
 OF.int("aBack", 20)
 
+// ======= TRANSLATE =========
+OF.lsystem("translate",400,400)
+p = Task({ 
+		500.do({ arg i;
+			OF.lsystem("translate",i,2*i);
+			0.02.wait 
+		}); 
+	});
+
+p.start;
+p.pause;
+p.resume;
+p.reset;
+p.stop;
+
+
 
 k.start;	// Start the Task
 k.pause;
@@ -52,7 +68,7 @@ e[\rate] = 0.05;	//	define the rate
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
-e[\thetaStep]=10.1;
+e[\thetaStep]= 1;
 e[\subString] = "F-F++F-F";
 e[\theta] = 60;
 e[\length] = 20;
@@ -62,11 +78,11 @@ e[\doos] = 4;
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "[F]--F";
-e[\subString] = "|[+F][-F]";
-e[\theta] = 110;
+e[\subString] = "|[+F][-F]-F";
+e[\theta] = 0;
 e[\length] = 40;
 e[\doos] = 6;
-e[\thetaStep]=0.1;
+e[\thetaStep]=1;
 Slider
 )
 //--twig
