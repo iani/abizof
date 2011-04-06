@@ -5,4 +5,7 @@ This openframeworks header and c++ files contain the following topics:
 -L-System implementation
 -folder with SC code for openFrameworks applications
 
-last edit by Aris Bezas Wed, 30 March 2011, 15:13
+from now on my master branch will be <fou> branch and for 
+experimentation i will use <experimental> branch.
+ 
+Aris Bezas Wed, 06 April 2011, 18:43
