@@ -32,7 +32,7 @@ class testApp : public ofBaseApp {
 		int nInstances;	// the number of instatces
 		int nodeId;
 		
-		eventsObject evObject;
+		//eventsObject evObject;
 		myClass **myClassObject;
 
 		string floatMsg;

@@ -13,7 +13,7 @@
 
 class myClass {
 public:
-	//~myClass() {}
+	//~myClass() {}	// Already define
 	myClass(){
 	    counter = 0;
 	}
@@ -31,12 +31,8 @@ public:
 		int intCounter=(int)counter;
 		ofNotifyEvent(newFloatEvent, counter, this);
 		ofNotifyEvent(newIntEvent, intCounter, this);
-		//ofNotifyEvent(gLine, intCounter, this);
-		
 		ofLine(float(intCounter % 600), 300.0, 400.0, 200.0);
 	}
-
-	//ofEvent<float> gLine;
 
 	ofEvent<float> newFloatEvent;
 	ofEvent<int> newIntEvent;
