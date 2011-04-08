@@ -42,17 +42,12 @@ void testApp::update(){
 			LSystem.noise = m.getArgAsFloat( 4 );	
 			lsystemGeneration = m.getArgAsInt32( 5 );
 			if (m.getArgAsString( 0 ) == "translate") {
-			printf("OK");
 				LSystem.startX = m.getArgAsInt32( 1 );
 				LSystem.startY = m.getArgAsInt32( 2 );
 			}
 			if	(lsystemGeneration == 0)	{
 				LSystem.startGeneration = true;
 			}				
-			
-//				cout << LSystem.depthLength <<	endl;
-//				cout << LSystem.scale <<	endl;
-//				cout << LSystem.depthLength <<	endl;								
 			LSystem.recieveString();		
 
 							

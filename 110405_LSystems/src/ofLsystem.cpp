@@ -69,49 +69,6 @@ void ofLsystem::setup(){
 }
 
 void ofLsystem::update(){
-	for ( int i=0; i<NUM_MSG_STRINGSLSystem; i++ )	{
-		if ( timers[i] < ofGetElapsedTimef() )
-			msg_strings[i] = "";
-	}	
-	while( receiver.hasWaitingMessages() )
-	{
-		ofxOscMessage m;
-		receiver.getNextMessage( &m ); 
-		if ( m.getAddress() == "/LSystem" )	{	
-				cout << "Give me a string:"; 
-				cin >> initString;          // it can be useful, but pause the application
-				cout << initString << endl;
-		}								
-		if ( m.getAddress() == "/bang" )	{	
-				substitution();
-				//recieveString();	
-				initString = "";					
-		}								
-		if ( m.getAddress() == "/initString" )	{	
-				initString = m.getArgAsString( 0 );
-				//cout << initString << endl;
-		}								
-		if ( m.getAddress() == "/subString" )	{	
-				subString = m.getArgAsString( 0 );		
-				cout << subString << endl;
-		}								
-		if ( m.getAddress() == "/startPos" )	{	
-			startX = m.getArgAsFloat( 0 );		
-			startY = m.getArgAsFloat( 1 );		
-			startZ = m.getArgAsFloat( 2 );								
-		}								
-		if ( m.getAddress() == "/startPosDefault" )	{	
-			startX = ofGetWidth()/2;
-			startY = ofGetHeight()/2;			
-			startZ = 0;				
-		}								
-		if ( m.getAddress() == "/theta" )	{	theta = m.getArgAsFloat( 0 );		}								
-		if ( m.getAddress() == "/thetaStep" )	{	thetaStep = m.getArgAsFloat( 0 );		}										
-		if ( m.getAddress() == "/length" )	{	length = m.getArgAsFloat( 0 );		}								
-		if ( m.getAddress() == "/lengthStep" )	{	lengthStep = m.getArgAsFloat( 0 );		}										
-		if ( m.getAddress() == "/scale" )	{	scale = m.getArgAsFloat( 0 );		}												
-
-	}
 }
 void ofLsystem::substitution(){
 	// here we will make the string substitution
@@ -140,7 +97,6 @@ void ofLsystem::recieveString(){
 	int j;
 	float oldLength;
 	oldLength = length;
-
 	ofPushMatrix();
 	if	(startGeneration)	{	
 		ofTranslate(startX, startY, startZ);			
@@ -174,10 +130,10 @@ void ofLsystem::recieveString(){
 			ofTranslate(0, - depthLengthScale, 0);						
 			depthLengthScale = oldLength;
 		}
-	}		
+	}			
 	ofPopMatrix();			
-
 }
+
 void ofLsystem::imageTranslation(){
 	int j;
 	depthLength = scale*depthLength;	
@@ -207,7 +163,6 @@ void ofLsystem::imageTranslation(){
 			ofPopMatrix();
 		}
 		if	(lsystemString[j] == '|')	{
-		//cout	<<	scale	<< endl;
 			depthLengthScale = scale*depthLength;	
 			ofLine(0,0,0, - depthLengthScale);
 			ofTranslate(0, - depthLengthScale, 0);						
