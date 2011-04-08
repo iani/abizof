@@ -36,15 +36,26 @@ void testApp::update(){
 
 		if ( m.getAddress() == "lsystem" )	{
 			LSystem.lsystemString = m.getArgAsString( 0 );
-			LSystem.length = m.getArgAsInt32( 1 );
+			LSystem.length = m.getArgAsFloat( 1 );
 			LSystem.theta = m.getArgAsFloat( 2 );
-			LSystem.scale = m.getArgAsFloat( 3 );				
-			LSystem.noise = m.getArgAsFloat( 4 );	
+			LSystem.scale = m.getArgAsInt32( 3 );				
+			LSystem.noise = m.getArgAsInt32( 4 );	
 			lsystemGeneration = m.getArgAsInt32( 5 );
 			if (m.getArgAsString( 0 ) == "translate") {
 				LSystem.startX = m.getArgAsInt32( 1 );
 				LSystem.startY = m.getArgAsInt32( 2 );
+				if (m.getArgAsString( 1 ) == "center"){
+					LSystem.startX = ofGetWidth()/2;
+					LSystem.startY = ofGetHeight()/2;
+				}
 			}
+			if (m.getArgAsString( 0 ) == "rgb") {
+				LSystem.rLsys = m.getArgAsInt32( 1 );
+				LSystem.gLsys = m.getArgAsInt32( 2 );
+				LSystem.bLsys = m.getArgAsInt32( 3 );
+				LSystem.aLsys = m.getArgAsInt32( 4 );				
+			}
+
 			if	(lsystemGeneration == 0)	{
 				LSystem.startGeneration = true;
 			}				

@@ -1,27 +1,27 @@
 /*
-LSystem and Event - enviroment study
-
+\LSystem and Event - enviroment study
+Quarks.gui
 Aris Bezas Tue, 05 April 2011, 10:15
 */
 
-Environment 	// cmd+D
+//:e Compile the Enviroment
 (
 e = (
 	initString: "F-F", 		// Initial string for substitution
 	subString: "F[F]", 		// Substitution string
 	doos: 4, 					// Recurcions	
-	thetaStep: 10, 			// step
+	thetaStep: 1, 			// step
 	lengthStep: 0.01, 
 	rate: 1, 
-	length: 13, 
-	theta: 60, 
+	length: 10, 
+	theta: 0, 
 	addr: NetAddr.localAddr);
 
 e use: { 
 	k = Task({
 		loop  { 
 			l= RedLSystem(~initString, ($F: ~subString));		
-			t = RedLTurtle(l, ~length, ~theta, 1);
+			t = RedLTurtle(l, ~length, ~theta, 1, 0);
 			~doos do: {
 				l.next;
 			};
@@ -32,18 +32,7 @@ e use: {
 		}
 	})
 }
-)
-
-// Control background colors at OF
-
-
-OF.int("rBack", 55)
-OF.int("gBack", 55)
-OF.int("bBack", 55)
-OF.int("aBack", 20)
-
-// ======= TRANSLATE =========
-OF.lsystem("translate",400,400)
+);
 p = Task({ 
 		500.do({ arg i;
 			OF.lsystem("translate",i,2*i);
@@ -51,41 +40,68 @@ p = Task({
 		}); 
 	});
 
+c = Task({
+		255.do({|i|
+			OF.lsystem("rgb",2,2,2,2);
+			0.02.wait;
+			})
+	});
+//:c color
+c.start
+//:b Control background colors at OF
+
+OF.int("rBack", 55);
+OF.int("gBack", 55);
+OF.int("bBack", 55);
+OF.int("aBack", 20);
+OF.lsystem("rgb", 0,0,0,30);
+
+//:t Translate
+OF.lsystem("translate",0,400)
+OF.lsystem("translate", "center");
+
 p.start;
-p.pause;
-p.resume;
-p.reset;
-p.stop;
+//p.pause;
+//p.resume;
+//p.reset;
+//p.stop;
 
 
-
+//:l lsystem
 k.start;	// Start the Task
-k.pause;
-k.stop;
-e[\rate] = 0.05;	//	define the rate
+//k.pause;
+//k.stop;
+e[\rate] = 0.02;	//	define the rate
+e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
+e[\initString] = "F";
+e[\thetaStep]= 100;
+e[\subString] = "F-F++F-F";
+e[\theta] = 0;
+e[\length] = 10;
+e[\doos] = 4;
 
-// koch curve
+//:k koch curve
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
-e[\thetaStep]= 1;
+e[\thetaStep]= 0.1;
 e[\subString] = "F-F++F-F";
 e[\theta] = 60;
 e[\length] = 20;
 e[\doos] = 4;
 )
-//--big h
+//:h big h
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "[F]--F";
 e[\subString] = "|[+F][-F]-F";
 e[\theta] = 0;
 e[\length] = 40;
-e[\doos] = 6;
+e[\doos] = 3;
 e[\thetaStep]=1;
-Slider
+
 )
-//--twig
+//:g twig
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
@@ -94,10 +110,10 @@ e[\theta] = 20;
 e[\length] = 70;
 e[\doos] = 6;
 )
-//--weed 1
+//:w weed 1
 (
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
-e[\initString] = "F";
+e[\initString] = "F-";
 e[\subString] = "-F-F[-F]F[+F]F";
 e[\theta] = 25;
 e[\length] = 40;
@@ -105,82 +121,24 @@ e[\doos] = 3;
 )
 
 
-// GUI
+//:s GUI
 (
+w = Window.new("Control theta step",Rect(300,Window.screenBounds.height-300,400,100)).front;
+a = Slider(w, Rect(50, 20, 300, 40))
+	.value_(0.5)
+	.step_(0.005)
+	.focus
+	.action_({
+		e[\thetaStep]=(a.value-0.5)*2;
+		//e[\thetaStep].postln;
+	})
+)
+
+/*
+(
+
 w = Window.new.front;
 a = Slider(w, Rect(20, 10, 150, 20));
-a.action = { e[\thetaStep]=a.value };
+a.action = { e[\thetaStep]=(a.value-0.5)*2 };
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////
-
-o = NetAddr("localhost", 46100);
-o.sendMsg("/initString", "F-F-F");
-o.sendMsg("/subString", "F[F]-F+F[--F]+F-F");
-o.sendMsg("/subString", "");
-o.sendMsg("/theta", 30);
-o.sendMsg("/thetaStep", 1);
-o.sendMsg("/lengthStep", 0.1);
-o.sendMsg("/startPosDefault");
-k = Task({
-		loop  { 
-		o.sendMsg("/startPos", 600,500,0);
-			0.1.wait;
-		}
-})
-k.start	
-k.stop
-
-Sendmidi.new
-e.free
-l.stop;
-\doos] = 3;
-
-//	Basic Initial
-(
-e[\addr] = NetAddr("127.0.0.1", 46100);  //localhost, oF port
-e[\initString] = "F-F-F-F";
-e[\subString] = "F[F]-F+F[--F]+F-F";
-e[\theta] = 20;
-e[\length] = 50;
-e[\thetaStep] = 1;
-e[\lengthStep] = 0.01;
-e[
-
-e.reset
-e.reject{}
-
-// test
-(
-e[\addr] = NetAddr("127.0.0.1", 57120);  //localhost, oF port
-e[\initString] = "F";
-e[\subString] = "F-F++F-F";
-e[\theta] = 60;
-e[\length] = 20;
-e[\doos] = 0;
-)
-
-
+*/
