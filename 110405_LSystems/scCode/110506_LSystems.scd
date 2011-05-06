@@ -4,8 +4,7 @@ Quarks.gui
 Aris Bezas Tue, 05 April 2011, 10:15
 */
 
-//:e Compile the Enviroment
-(
+//:Compile the Enviroment
 e = (
 	initString: "F-F", 		// Initial string for substitution
 	subString: "F[F]", 		// Substitution string
@@ -31,57 +30,33 @@ e use: {
 			~rate.wait;
 		}
 	})
-}
-);
-p = Task({ 
-		500.do({ arg i;
-			OF.lsystem("translate",i,2*i);
-			0.02.wait 
-		}); 
-	});
-
-c = Task({
-		255.do({|i|
-			OF.lsystem("rgb",2,2,2,2);
-			0.02.wait;
-			})
-	});
-//:c color
-c.start
-//:b Control background colors at OF
-
+};
+k.start;
+OF.lsystem("translate",0,400);
+OF.lsystem("translate", "center");
 OF.int("rBack", 55);
 OF.int("gBack", 55);
 OF.int("bBack", 55);
 OF.int("aBack", 20);
-OF.lsystem("rgb", 0,0,0,30);
+OF.lsystem("rgb", 255,255,255,255);
 
-//:t Translate
-OF.lsystem("translate",0,400)
-OF.lsystem("translate", "center");
-
-p.start;
-//p.pause;
-//p.resume;
-//p.reset;
-//p.stop;
-
-
-//:l lsystem
-k.start;	// Start the Task
-//k.pause;
-//k.stop;
 e[\rate] = 0.02;	//	define the rate
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
-e[\thetaStep]= 100;
-e[\subString] = "F-F++F-F";
+e[\thetaStep]= 0.1;
+e[\subString] = "F-F";
 e[\theta] = 0;
 e[\length] = 10;
 e[\doos] = 4;
 
-//:k koch curve
-(
+//:Play
+e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
+e[\initString] = "F";
+e[\subString] = "F[-F]F[+F]F";
+e[\theta] = 25;
+e[\length] = 10;
+e[\doos] = 5;
+//:Koch curve
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
 e[\thetaStep]= 0.1;
@@ -89,9 +64,7 @@ e[\subString] = "F-F++F-F";
 e[\theta] = 60;
 e[\length] = 20;
 e[\doos] = 4;
-)
-//:h big h
-(
+//:H
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "[F]--F";
 e[\subString] = "|[+F][-F]-F";
@@ -99,29 +72,23 @@ e[\theta] = 0;
 e[\length] = 40;
 e[\doos] = 3;
 e[\thetaStep]=1;
-
-)
-//:g twig
-(
+//:Twig
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
 e[\subString] = "|[-F][+F]";
 e[\theta] = 20;
 e[\length] = 70;
 e[\doos] = 6;
-)
-//:w weed 1
-(
+//:Weed 
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F-";
 e[\subString] = "-F-F[-F]F[+F]F";
 e[\theta] = 25;
 e[\length] = 40;
 e[\doos] = 3;
-)
 
 
-//:s GUI
+//:GUI
 (
 w = Window.new("Control theta step",Rect(300,Window.screenBounds.height-300,400,100)).front;
 a = Slider(w, Rect(50, 20, 300, 40))

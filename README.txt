@@ -3,7 +3,6 @@ This openframeworks header and c++ files contain the following topics:
 -array of instances
 -object constructor and deconstructor
 -L-System implementation
--folder with SC code for openFrameworks applications
 
 from now on my master branch will be <fou> branch and for 
 experimentation i will use <experimental> branch.
