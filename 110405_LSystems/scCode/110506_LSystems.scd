@@ -49,13 +49,14 @@ e[\theta] = 0;
 e[\length] = 10;
 e[\doos] = 4;
 
-//:Play
+//:Testing
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
 e[\subString] = "F[-F]F[+F]F";
 e[\theta] = 25;
 e[\length] = 10;
-e[\doos] = 5;
+e[\doos] = 2;
+
 //:Koch curve
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
@@ -64,7 +65,8 @@ e[\subString] = "F-F++F-F";
 e[\theta] = 60;
 e[\length] = 20;
 e[\doos] = 4;
-//:H
+
+//:H system
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "[F]--F";
 e[\subString] = "|[+F][-F]-F";
@@ -72,6 +74,7 @@ e[\theta] = 0;
 e[\length] = 40;
 e[\doos] = 3;
 e[\thetaStep]=1;
+
 //:Twig
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F";
@@ -79,6 +82,7 @@ e[\subString] = "|[-F][+F]";
 e[\theta] = 20;
 e[\length] = 70;
 e[\doos] = 6;
+
 //:Weed 
 e[\addr] = NetAddr("127.0.0.1", 12345);  //localhost, oF port
 e[\initString] = "F-";
@@ -86,7 +90,6 @@ e[\subString] = "-F-F[-F]F[+F]F";
 e[\theta] = 25;
 e[\length] = 40;
 e[\doos] = 3;
-
 
 //:GUI
 (
